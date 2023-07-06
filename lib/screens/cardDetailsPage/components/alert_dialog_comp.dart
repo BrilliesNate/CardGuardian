@@ -31,8 +31,6 @@ class _AlertDialogCompState extends State<AlertDialogComp> {
             description =
             "Please make sure you add a card that has not been added before";
             cardLable = Lottie.asset('assets/lottie_animations/cardAlreadySaved.json');
-
-            // statements;
           }
           break;
 
@@ -41,37 +39,10 @@ class _AlertDialogCompState extends State<AlertDialogComp> {
             title = "Card Banned!";
             description = "This Card has been banned in the following countries __remeber to add countries__";
             cardLable = Lottie.asset('assets/lottie_animations/warning.json');
-            // cardLable = Image.asset(
-            //   'assets/images/errorPage.png',
-            //   width: 240,
-            //   height: 170,
-            //   fit: BoxFit.fitHeight,
-            // );
 
-            //statements;
           }
           break;
-        case 69:
-          {
-            title = "No Chart Data!";
-            description =
-            "Please select another date";
-            cardLable = Lottie.asset('assets/lottie_animations/loginBtn.json');
-            //statements;
-          }
 
-          break;
-
-        case 1000:
-          {
-            title = "No Logger";
-            description =
-            "Please contact support to add a logger to your account";
-            cardLable = Lottie.asset('assets/lottie_animations/loginBtn.json');
-            //statements;
-          }
-
-          break;
 
         default:
           {
@@ -113,18 +84,7 @@ class _AlertDialogCompState extends State<AlertDialogComp> {
             Center(
               child: cardLable,
             ),
-            // Padding(
-            //   padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-            //   child: Text(
-            //     'Error code: $errorCode',
-            //     style: FlutterFlowTheme.of(context).bodyText1.override(
-            //       fontFamily: 'Poppins',
-            //       color: FlutterFlowTheme.of(context).secondaryText,
-            //     ),
-            //   ),
-            // ),
 
-            // Text('Would you like to approve of this message?'),
           ],
         ),
       ),

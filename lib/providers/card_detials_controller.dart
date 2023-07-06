@@ -19,17 +19,18 @@ class CardDetailsController extends ChangeNotifier {
   List<BannedCard> bannedCards = [
     BannedCard('4123123412341234', ['South Africa', 'Country B']),
   ];
+  List<CreditCardDetails> creditCardList = [];
+  String bannedCardNumber = "";
+  String bannedCountry = "";
 
   int tabIndex = 1;
   late PageController pageController;
-
 
   setTabIndex(int v) {
     tabIndex = v;
     notifyListeners();
   }
 
-  List<CreditCardDetails> creditCardList = [];
 
   setCardNumber(String value) {
     cardNumber = value;
@@ -51,7 +52,7 @@ class CardDetailsController extends ChangeNotifier {
     notifyListeners();
   }
 
-  setCardType(String value){
+  setCardType(String value) {
     cardType = value;
     notifyListeners();
   }
@@ -87,7 +88,6 @@ class CardDetailsController extends ChangeNotifier {
     notifyListeners();
   }
 
-
   // Saving Credit Card Details to local as CreditCardDetails Object.
   Future<void> saveCreditCardDetails(context) async {
     CreditCardDetails cdd = CreditCardDetails(
@@ -113,13 +113,12 @@ class CardDetailsController extends ChangeNotifier {
 
       if (cardSaved) {
         print("Card already saved");
-         _showMyDialog(context, 100);
-
+        _showMyDialog(context, 100);
       } else {
         creditCardList.add(cdd);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         List<String> stringList =
-        creditCardList.map((cdd) => jsonEncode(cdd.toJson())).toList();
+            creditCardList.map((cdd) => jsonEncode(cdd.toJson())).toList();
         print(stringList[0]);
         await prefs.setStringList('creditCardList', stringList);
       }
@@ -165,7 +164,21 @@ class CardDetailsController extends ChangeNotifier {
     return false;
   }
 
+
+  setBannedCardNumber(String value) {
+    bannedCardNumber = value;
+  }
+
+  setBannedCountry(String value) {
+    bannedCountry = value;
+  }
+
+  addBannedCard() {
+    bannedCards.add(BannedCard(bannedCardNumber, [bannedCountry]));
+  }
+
   bool initPage = false;
+
   initPageController() {
     if (!initPage) {
       initPage = true;
@@ -173,20 +186,20 @@ class CardDetailsController extends ChangeNotifier {
     }
   }
 
-  navToNewPage(){
-    pageController.animateToPage( tabIndex,
+  navToNewPage() {
+    pageController.animateToPage(tabIndex,
         duration: Duration(milliseconds: 300), curve: Curves.ease);
   }
 
-   Future<void> _showMyDialog(context,errorCode) async {
+  Future<void> _showMyDialog(context, errorCode) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return  AlertDialogComp(errorCode: errorCode,);
-
+        return AlertDialogComp(
+          errorCode: errorCode,
+        );
       },
     );
   }
-
 }
